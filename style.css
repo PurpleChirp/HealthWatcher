@@ -1,0 +1,228 @@
+/* Custom styles for the health monitoring dashboard */
+
+:root {
+    --pulse-color: #dc3545;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+}
+
+/* Health status indicator with pulse animation */
+.health-status-indicator {
+    font-size: 1.5rem;
+}
+
+.health-status-indicator .fa-circle.normal {
+    animation: pulse 2s infinite;
+}
+
+.health-status-indicator .fa-circle.emergency {
+    animation: emergency-pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes emergency-pulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+        box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+    }
+}
+
+/* Metric cards styling */
+.metric-card {
+    padding: 1rem;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.5rem;
+    background-color: var(--bs-body-bg);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+}
+
+.metric-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--bs-primary);
+}
+
+/* Health score progress bar colors */
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+.progress-bar.bg-danger {
+    background-color: var(--bs-danger) !important;
+}
+
+.progress-bar.bg-warning {
+    background-color: var(--bs-warning) !important;
+}
+
+.progress-bar.bg-success {
+    background-color: var(--bs-success) !important;
+}
+
+/* Recommendation list styling */
+.recommendation-item {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid var(--bs-primary);
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 0.25rem;
+}
+
+.recommendation-item.priority-high {
+    border-left-color: var(--bs-danger);
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.recommendation-item.priority-medium {
+    border-left-color: var(--bs-warning);
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.recommendation-item.priority-low {
+    border-left-color: var(--bs-success);
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-content {
+    text-align: center;
+    color: white;
+}
+
+/* Chart container */
+#healthChart {
+    max-height: 400px;
+}
+
+/* Status indicators */
+.status-normal {
+    color: var(--bs-success) !important;
+}
+
+.status-warning {
+    color: var(--bs-warning) !important;
+}
+
+.status-danger {
+    color: var(--bs-danger) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .metric-card {
+        margin-bottom: 1rem;
+    }
+
+    .metric-value {
+        font-size: 1.25rem;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+/* Animation for metric updates */
+.metric-value.updated {
+    animation: highlight 1s ease-in-out;
+}
+
+@keyframes highlight {
+    0% {
+        background-color: transparent;
+    }
+
+    50% {
+        background-color: rgba(13, 110, 253, 0.2);
+        border-radius: 0.25rem;
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* Custom scrollbar for recommendations */
+.recommendation-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.recommendation-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.recommendation-scroll::-webkit-scrollbar-track {
+    background: var(--bs-secondary-bg);
+}
+
+.recommendation-scroll::-webkit-scrollbar-thumb {
+    background: var(--bs-secondary);
+    border-radius: 3px;
+}
+
+.recommendation-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-secondary-color);
+}
